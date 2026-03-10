@@ -1,173 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>FPS Sensitivity Converter — Valorant, CS2, Fortnite, Apex & More | ToolSuite</title>
-  <meta name="description" content="Free FPS mouse sensitivity converter. Convert your sensitivity between Valorant, CS2, Fortnite, Apex Legends, Overwatch 2, Rainbow Six Siege, and more. Find your perfect eDPI instantly." />
-  <meta name="keywords" content="sensitivity converter, valorant sensitivity, CS2 sensitivity, fortnite sensitivity, apex legends sensitivity, overwatch sensitivity, rainbow six sensitivity, eDPI calculator, mouse sensitivity converter, FPS sens converter" />
-  <meta name="robots" content="index, follow" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none'; form-action 'none';" />
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="DENY" />
-  <link rel="stylesheet" href="shared.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,500;1,400&display=swap" rel="stylesheet" />
+  <meta name="description" content="Free FPS mouse sensitivity converter. Convert between Valorant, CS2, Fortnite, Apex Legends, Overwatch 2, Rainbow Six Siege and more. Find your eDPI instantly."/>
+  <meta name="keywords" content="sensitivity converter, valorant sensitivity, CS2 sensitivity, fortnite sensitivity, apex legends sensitivity, overwatch sensitivity, eDPI calculator, mouse sensitivity converter FPS"/>
+  <meta name="robots" content="index,follow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,500;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fdf6ee;--surface:#fff;--surface2:#fff9f3;--border:#f0e4d4;--border-hi:#e8cfa8;
+  --gold:#f5a623;--gold-light:#fff3d6;--gold-dark:#d4880a;
+  --green:#27ae60;--green-light:#eafaf1;--red:#e74c3c;--red-light:#fdf0ee;
+  --blue:#3498db;--blue-light:#eaf4fd;--purple:#8e44ad;--purple-light:#f5eafb;
+  --text:#2d2416;--text-mid:#7a6148;--text-soft:#b09a7e;--text-dim:#d4c4ae;
+  --font-main:'Nunito',sans-serif;--font-serif:'Lora',serif;
+  --radius:20px;--radius-sm:12px;--radius-xs:8px;
+  --shadow-card:0 8px 40px rgba(120,80,20,.10);--shadow-btn:0 6px 24px rgba(245,166,35,.40)
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-main);min-height:100vh;overflow-x:hidden;position:relative}
+.bg-orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;animation:orb-drift 18s ease-in-out infinite alternate}
+.orb1{width:520px;height:520px;background:rgba(245,166,35,.18);top:-120px;left:-160px;animation-duration:22s}
+.orb2{width:380px;height:380px;background:rgba(255,120,80,.12);top:40%;right:-100px;animation-duration:17s;animation-delay:-6s}
+.orb3{width:300px;height:300px;background:rgba(80,180,255,.10);bottom:10%;left:30%;animation-duration:25s;animation-delay:-12s}
+@keyframes orb-drift{from{transform:translate(0,0)scale(1)}to{transform:translate(30px,20px)scale(1.08)}}
+/* Ads hidden until approved */
+.ad-banner{display:none}
+.ad-sidebar{display:none}
+/* Nav */
+.site-nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:12px 20px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-bottom:1.5px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-link{text-decoration:none;font-size:12px;font-weight:800;color:var(--text-mid);padding:6px 14px;border-radius:999px;border:1.5px solid var(--border);background:white;transition:all .2s;white-space:nowrap}
+.nav-link:hover{border-color:var(--gold);color:var(--gold-dark);background:var(--gold-light)}
+.nav-link.active{background:linear-gradient(135deg,#f5a623,#ff7c44);color:white;border-color:transparent;box-shadow:0 4px 14px rgba(245,166,35,.35)}
+/* Page */
+.page-wrapper{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 20px 60px}
+/* Header */
+.site-header{text-align:center;padding:44px 20px 22px}
+.logo-row{display:inline-flex;align-items:center;gap:16px;margin-bottom:18px}
+.logo-icon{width:60px;height:60px;background:linear-gradient(135deg,#f5a623,#ff7c44);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;color:white;box-shadow:0 8px 28px rgba(245,166,35,.40);animation:icon-float 4s ease-in-out infinite;flex-shrink:0}
+@keyframes icon-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.logo{font-weight:900;font-size:clamp(1.6rem,5vw,2.8rem);letter-spacing:-.02em;line-height:1}
+.tagline{font-family:var(--font-serif);font-style:italic;font-size:14px;color:var(--text-soft);margin-top:4px}
+/* Layout */
+.main-layout{display:flex;align-items:flex-start;justify-content:center;gap:32px;margin-top:12px}
+/* Card */
+.calc-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:36px 32px;width:100%;max-width:580px;flex-shrink:0;box-shadow:var(--shadow-card);position:relative;overflow:hidden}
+.calc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#f5a623,#ff7c44,#f5a623);background-size:200%;animation:shimmer 3s linear infinite}
+@keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+.section-label{font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--text-soft);margin-bottom:16px}
+/* Inputs */
+.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+.input-group{display:flex;flex-direction:column;gap:6px}
+.input-group.full-width{grid-column:1/-1}
+label{font-size:13px;font-weight:800;color:var(--text)}
+.input-hint{font-size:11px;color:var(--text-soft);font-style:italic;font-family:var(--font-serif)}
+.input-wrap{display:flex;align-items:center;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-sm);transition:border-color .2s,box-shadow .2s,background .2s}
+.input-wrap:focus-within{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,166,35,.15);background:white}
+.prefix{padding:0 13px;font-size:14px;color:var(--text-soft);border-right:1.5px solid var(--border);user-select:none;min-width:42px;text-align:center;flex-shrink:0}
+input[type=number],input[type=text]{flex:1;background:transparent;border:none;outline:none;padding:13px 15px;color:var(--text);font-family:var(--font-main);font-size:15px;font-weight:700;width:100%;appearance:textfield}
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+input::placeholder{color:var(--text-dim);font-weight:400}
+select{flex:1;background:transparent;border:none;outline:none;padding:13px 15px;color:var(--text);font-family:var(--font-main);font-size:14px;font-weight:700;width:100%;cursor:pointer}
+/* Buttons */
+.calc-btn{width:100%;padding:17px 24px;background:linear-gradient(135deg,#f5a623,#ff7c44);color:white;border:none;border-radius:var(--radius-sm);font-family:var(--font-main);font-size:16px;font-weight:900;cursor:pointer;box-shadow:var(--shadow-btn);transition:transform .18s,box-shadow .18s,filter .18s;position:relative;overflow:hidden}
+.calc-btn:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(245,166,35,.5);filter:brightness(1.05)}
+.calc-btn:active{transform:translateY(0)}
+.reset-btn{margin-top:16px;width:100%;background:transparent;border:1.5px solid var(--border-hi);color:var(--text-soft);border-radius:var(--radius-sm);padding:11px 20px;font-family:var(--font-main);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;display:none}
+.reset-btn:hover{border-color:var(--gold);color:var(--gold-dark);background:var(--gold-light)}
+/* Results */
+.results-panel{margin-top:28px;display:none}
+@keyframes pop-in{from{opacity:0;transform:scale(.96)translateY(10px)}to{opacity:1;transform:scale(1)translateY(0)}}
+.verdict-banner{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:var(--radius-sm);margin-bottom:18px;background:var(--gold-light);border:1.5px solid #f5d78e;transition:all .3s}
+.verdict-banner.win{background:var(--green-light);border-color:#a8e6c2}
+.verdict-banner.loss{background:var(--red-light);border-color:#f5bfba}
+.verdict-banner.info{background:var(--blue-light);border-color:#a8d4f5}
+.verdict-emoji{font-size:34px;line-height:1;flex-shrink:0}
+.verdict-title{font-size:16px;font-weight:900;color:var(--text);line-height:1.2}
+.verdict-sub{font-size:13px;color:var(--text-soft);font-family:var(--font-serif);font-style:italic;margin-top:2px}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.result-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.result-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(120,80,20,.08)}
+.result-card.ra{background:var(--green-light);border-color:#a8e6c2}
+.result-card.ra.lc{background:var(--red-light);border-color:#f5bfba}
+.result-card.rb{background:var(--gold-light);border-color:#f5d78e}
+.result-card.rc{background:var(--blue-light);border-color:#a8d4f5}
+.result-card.rd{background:var(--purple-light);border-color:#d4a8f5}
+.res-icon{font-size:20px;margin-bottom:5px}
+.res-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--text-soft);margin-bottom:5px}
+.res-value{font-size:15px;font-weight:900;color:var(--text)}
+.res-value.xl{font-size:21px}
+.res-value.profit{color:var(--green)}
+.res-value.loss{color:var(--red)}
+.res-value.neutral{color:var(--blue)}
+/* Bar */
+.bar-wrap{margin-top:4px}
+.bar-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--text-dim);margin-bottom:5px;font-weight:700}
+.bar-track{width:100%;height:11px;background:linear-gradient(90deg,var(--red-light) 0%,#fff5e0 33%,var(--gold-light) 50%,var(--green-light) 100%);border-radius:999px;border:1.5px solid var(--border);position:relative}
+.bar-fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;transition:width .8s cubic-bezier(.22,1,.36,1),background .4s}
+.bar-needle{position:absolute;top:50%;transform:translate(-50%,-50%);width:18px;height:18px;background:white;border:2.5px solid var(--gold);border-radius:50%;box-shadow:0 2px 10px rgba(245,166,35,.4);transition:left .8s cubic-bezier(.22,1,.36,1),border-color .4s}
+/* Info steps */
+.info-section{max-width:560px;margin:48px auto 0;padding:0 4px}
+.info-title{font-weight:900;font-size:1.35rem;color:var(--text);margin-bottom:20px;letter-spacing:-.01em}
+.steps{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.step{background:white;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:18px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 2px 12px rgba(120,80,20,.05);transition:transform .2s,box-shadow .2s}
+.step:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(245,166,35,.14)}
+.step-bubble{width:34px;height:34px;background:linear-gradient(135deg,#f5a623,#ff7c44);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:white;flex-shrink:0;box-shadow:0 4px 12px rgba(245,166,35,.30)}
+.step-body strong{display:block;font-size:13px;font-weight:800;color:var(--text);margin-bottom:3px}
+.step-body p{font-size:12px;color:var(--text-soft);line-height:1.55;font-family:var(--font-serif);font-style:italic}
+/* SEO */
+.seo-section{max-width:760px;margin:48px auto 0;padding:0 4px}
+.seo-section h2{font-size:1.45rem;font-weight:900;color:var(--text);margin-bottom:10px;letter-spacing:-.01em}
+.seo-section h3{font-size:1.05rem;font-weight:800;color:var(--text-mid);margin:24px 0 7px}
+.seo-section p{font-size:14px;color:var(--text-mid);line-height:1.75;margin-bottom:10px}
+.seo-section ul{padding-left:20px;margin-bottom:10px}
+.seo-section li{font-size:14px;color:var(--text-mid);line-height:1.8}
+.seo-section strong{color:var(--text)}
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.faq-item{background:white;border:1.5px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:14px 18px;font-family:var(--font-main);font-size:14px;font-weight:800;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.faq-q:hover{background:var(--surface2)}
+.faq-icon{font-size:16px;transition:transform .3s;flex-shrink:0}
+.faq-q.open .faq-icon{transform:rotate(45deg)}
+.faq-a{display:none;padding:0 18px 14px;font-size:14px;color:var(--text-mid);line-height:1.75;font-family:var(--font-serif);font-style:italic}
+.faq-a.open{display:block}
+/* Footer */
+.site-footer{text-align:center;padding:32px 0 20px;font-size:12px;color:var(--text-dim);font-family:var(--font-serif);font-style:italic;border-top:1.5px solid var(--border);margin-top:44px}
+.footer-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
+.footer-links a{font-size:12px;color:var(--text-soft);text-decoration:none;font-style:normal;font-family:var(--font-main);font-weight:700;transition:color .2s}
+.footer-links a:hover{color:var(--gold-dark)}
+/* Shake */
+@keyframes shake{0%{transform:translateX(0)}18%{transform:translateX(-7px)}36%{transform:translateX(7px)}54%{transform:translateX(-4px)}72%{transform:translateX(4px)}100%{transform:translateX(0)}}
+/* Responsive */
+@media(max-width:580px){
+  .calc-card{padding:24px 16px}
+  .input-grid{grid-template-columns:1fr}
+  .input-group.full-width{grid-column:auto}
+  .results-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .logo-row{gap:10px}
+  .logo-icon{width:48px;height:48px;font-size:20px}
+  .site-nav{gap:5px}
+  .nav-link{font-size:10px;padding:5px 9px}
+}
+</style>
+
+  <style>
+  .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px;margin-top:10px}
+  .gcard{background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;transition:transform .2s}
+  .gcard:hover{transform:translateY(-2px)}
+  .gcard.hl{background:var(--gold-light);border-color:var(--gold)}
+  .gname{font-size:11px;font-weight:800;color:var(--text-mid);margin-bottom:3px}
+  .gsens{font-size:15px;font-weight:900;color:var(--text)}
+  </style>
 </head>
 <body>
-  <div class="bg-orb orb1"></div>
-  <div class="bg-orb orb2"></div>
-  <div class="bg-orb orb3"></div>
-
+  <div class="bg-orb orb1"></div><div class="bg-orb orb2"></div><div class="bg-orb orb3"></div>
   <nav class="site-nav">
-    <a class="nav-link" href="index.html">₿ Crypto Calc</a>
-    <a class="nav-link" href="gpa.html">🎓 GPA Calc</a>
-    <a class="nav-link active" href="sensitivity.html">🎮 Sensitivity Calc</a>
-    <a class="nav-link" href="pdf.html">📄 PDF Editor</a>
-    <a class="nav-link" href="downloader.html">⬇️ Video Downloader</a>
+    <a class="nav-link" href="index.html">₿ Crypto</a>
+    <a class="nav-link" href="gpa.html">🎓 GPA</a>
+    <a class="nav-link active" href="sensitivity.html">🎮 Sensitivity</a>
+    <a class="nav-link" href="converter.html">🎬 Converter</a>
+    <a class="nav-link" href="pdf.html">📄 PDF</a>
   </nav>
-
-  <div class="ad-banner ad-top"></div>
-
   <div class="page-wrapper">
     <header class="site-header">
       <div class="logo-row">
-        <div class="logo-icon" aria-hidden="true">🎮</div>
-        <div class="logo-text">
-          <h1 class="logo">Sensitivity Converter</h1>
-          <p class="tagline">Convert your FPS mouse sensitivity across any game</p>
-        </div>
+        <div class="logo-icon">🎮</div>
+        <div><h1 class="logo">Sensitivity Converter</h1><p class="tagline">Convert mouse sensitivity across every major FPS game</p></div>
       </div>
     </header>
-
     <main class="main-layout">
-      <aside class="ad-sidebar"></aside>
-
-      <section class="calc-card" style="max-width:620px">
-        <p class="section-label">🖱️ Convert your sensitivity</p>
-
+      <section class="calc-card" style="max-width:600px">
+        <p class="section-label">🖱️ Enter your sensitivity details</p>
         <div class="input-grid">
           <div class="input-group">
             <label for="fromGame">From Game</label>
-            <div class="input-wrap"><span class="prefix">🎯</span>
-              <select id="fromGame"></select>
-            </div>
+            <div class="input-wrap" style="overflow:visible"><span class="prefix">🎯</span><select id="fromGame"></select></div>
           </div>
           <div class="input-group">
             <label for="toGame">To Game</label>
-            <div class="input-wrap"><span class="prefix">🎯</span>
-              <select id="toGame"></select>
-            </div>
+            <div class="input-wrap" style="overflow:visible"><span class="prefix">🎯</span><select id="toGame"></select></div>
           </div>
           <div class="input-group">
             <label for="fromSens">Your Sensitivity</label>
-            <div class="input-wrap"><span class="prefix">🖱</span><input type="number" id="fromSens" placeholder="e.g. 0.32" min="0" max="9999" step="any" autocomplete="off" /></div>
+            <div class="input-wrap"><span class="prefix">🖱</span><input type="number" id="fromSens" placeholder="e.g. 0.32" min="0" max="9999" step="any" autocomplete="off"/></div>
             <span class="input-hint">In-game sensitivity value</span>
           </div>
           <div class="input-group">
-            <label for="mouseDPI">Mouse DPI</label>
-            <div class="input-wrap"><span class="prefix">⚙</span><input type="number" id="mouseDPI" placeholder="e.g. 800" min="100" max="25600" step="50" autocomplete="off" /></div>
-            <span class="input-hint">Your mouse DPI setting</span>
+            <label for="dpi">Mouse DPI</label>
+            <div class="input-wrap"><span class="prefix">⚙</span><input type="number" id="dpi" placeholder="e.g. 800" min="100" max="25600" step="50" autocomplete="off"/></div>
+            <span class="input-hint">Your hardware DPI setting</span>
           </div>
         </div>
-
         <button class="calc-btn" type="button" onclick="convertSens()">Convert Sensitivity 🎯</button>
-
         <div class="results-panel" id="results">
-          <div class="verdict-banner" id="verdict-banner">
-            <span class="verdict-emoji" id="verdict-emoji">🎯</span>
-            <div class="verdict-copy">
-              <div class="verdict-title" id="verdict-title">Here's your converted sensitivity</div>
-              <div class="verdict-sub" id="verdict-sub">Use these values in your game settings</div>
-            </div>
+          <div class="verdict-banner" id="vbanner">
+            <span class="verdict-emoji" id="vemoji">🎯</span>
+            <div><div class="verdict-title" id="vtitle">Converted!</div><div class="verdict-sub" id="vsub">Use this in your game settings</div></div>
           </div>
           <div class="results-grid">
-            <div class="result-card result-accent"><div class="res-icon">🎮</div><div class="res-label">Converted Sensitivity</div><div class="res-value res-large" id="val-sens">—</div></div>
-            <div class="result-card result-accent2"><div class="res-icon">📐</div><div class="res-label">eDPI</div><div class="res-value res-large" id="val-edpi">—</div></div>
-            <div class="result-card result-blue"><div class="res-icon">📏</div><div class="res-label">cm / 360°</div><div class="res-value" id="val-cm360">—</div></div>
-            <div class="result-card"><div class="res-icon">🔢</div><div class="res-label">in / 360°</div><div class="res-value" id="val-in360">—</div></div>
+            <div class="result-card ra"><div class="res-icon">🎮</div><div class="res-label">New Sensitivity</div><div class="res-value xl" id="v-sens">—</div></div>
+            <div class="result-card rb"><div class="res-icon">📐</div><div class="res-label">eDPI</div><div class="res-value xl" id="v-edpi">—</div></div>
+            <div class="result-card rc"><div class="res-icon">📏</div><div class="res-label">cm / 360°</div><div class="res-value" id="v-cm">—</div></div>
+            <div class="result-card"><div class="res-icon">🔢</div><div class="res-label">in / 360°</div><div class="res-value" id="v-in">—</div></div>
           </div>
-
-          <div id="all-games-section">
-            <p class="section-label" style="margin-top:20px">📋 Your sensitivity in all games</p>
-            <div id="all-games-grid" class="all-games-grid"></div>
-          </div>
+          <p class="section-label" style="margin-top:20px">📋 All games at a glance</p>
+          <div class="games-grid" id="games-grid"></div>
         </div>
-
         <button class="reset-btn" id="resetBtn" type="button" onclick="resetSens()">↺ Reset</button>
       </section>
-
-      <aside class="ad-sidebar"></aside>
     </main>
-
-    <div class="ad-banner ad-mid"></div>
 
     <section class="info-section">
       <h2 class="info-title">How it works</h2>
       <div class="steps">
-        <div class="step"><div class="step-bubble">1</div><div class="step-body"><strong>Select source game</strong><p>Pick the game you currently play and know your sensitivity for.</p></div></div>
-        <div class="step"><div class="step-bubble">2</div><div class="step-body"><strong>Select target game</strong><p>Choose the game you want to convert your sensitivity to.</p></div></div>
-        <div class="step"><div class="step-bubble">3</div><div class="step-body"><strong>Enter your values</strong><p>Type your current in-game sensitivity and your mouse DPI.</p></div></div>
-        <div class="step"><div class="step-bubble">✨</div><div class="step-body"><strong>Get your new sens</strong><p>See the converted sensitivity, eDPI, and cm/360° for muscle memory.</p></div></div>
+        <div class="step"><div class="step-bubble">1</div><div class="step-body"><strong>Pick source game</strong><p>Choose the game you currently play.</p></div></div>
+        <div class="step"><div class="step-bubble">2</div><div class="step-body"><strong>Pick target game</strong><p>The game you want to convert your sensitivity to.</p></div></div>
+        <div class="step"><div class="step-bubble">3</div><div class="step-body"><strong>Enter values</strong><p>Type your current sensitivity and mouse DPI.</p></div></div>
+        <div class="step"><div class="step-bubble">✨</div><div class="step-body"><strong>Get results</strong><p>See your converted sensitivity, eDPI, cm/360° and all-games chart.</p></div></div>
       </div>
     </section>
 
     <article class="seo-section">
-      <h2>FPS Sensitivity Converter — Valorant, CS2, Fortnite & More</h2>
-      <p>Switching games but want to keep the same mouse feel? Our <strong>free sensitivity converter</strong> translates your sensitivity across all major FPS titles — <strong>Valorant, CS2 (Counter-Strike 2), Fortnite, Apex Legends, Overwatch 2, Rainbow Six Siege, Warzone, Rust, Escape from Tarkov</strong>, and more.</p>
-
+      <h2>FPS Mouse Sensitivity Converter — Valorant, CS2, Fortnite & More</h2>
+      <p>Switching games but want to keep the same crosshair feel? Our <strong>free sensitivity converter</strong> translates your sensitivity across all major FPS titles including <strong>Valorant, CS2, Fortnite, Apex Legends, Overwatch 2, Rainbow Six Siege, Warzone</strong>, and more — using each game's exact yaw (degrees-per-count) value for pixel-perfect accuracy.</p>
       <h3>What Is eDPI?</h3>
-      <p><strong>eDPI (effective DPI)</strong> = your mouse DPI × your in-game sensitivity. It's the true measure of how fast your crosshair moves. A Valorant player at 800 DPI × 0.32 sens has an eDPI of 256. Most pro players sit between 200–400 eDPI. Knowing your eDPI lets you match your feel perfectly across any game.</p>
-
+      <p><strong>eDPI</strong> (effective DPI) = DPI × in-game sensitivity. It is the universal measure of how fast your crosshair moves regardless of game. Most pro players sit between 200–400 eDPI. Knowing your eDPI lets you match your feel perfectly across any title.</p>
       <h3>What Is cm/360°?</h3>
-      <p><strong>cm/360°</strong> is how many centimetres you need to move your mouse to complete a full 360° rotation in-game. This is the most universal way to compare sensitivities across games. Most FPS pros use between 20–50 cm/360°.</p>
-
+      <p>The centimetres you move your mouse to make a full 360° turn in-game. The most platform-agnostic way to compare sensitivities. Tactical FPS pros typically use 30–50 cm/360°.</p>
       <h3>Supported Games</h3>
       <ul>
-        <li>🎯 <strong>Valorant</strong> — Riot's tactical shooter</li>
-        <li>💥 <strong>CS2 / Counter-Strike 2</strong> — The classic</li>
-        <li>🏗️ <strong>Fortnite</strong> — Battle royale</li>
-        <li>🦊 <strong>Apex Legends</strong> — Hero battle royale</li>
-        <li>🌍 <strong>Overwatch 2</strong> — Team hero shooter</li>
-        <li>🛡️ <strong>Rainbow Six Siege</strong> — Tactical FPS</li>
-        <li>☠️ <strong>Warzone / Modern Warfare</strong> — COD Battle Royale</li>
-        <li>🔫 <strong>Rust</strong>, <strong>Escape from Tarkov</strong>, <strong>Battlefield</strong>, and more</li>
+        <li>🎯 Valorant &nbsp;·&nbsp; 💥 CS2 &nbsp;·&nbsp; 🏗️ Fortnite &nbsp;·&nbsp; 🦊 Apex Legends</li>
+        <li>🌍 Overwatch 2 &nbsp;·&nbsp; 🛡️ Rainbow Six Siege &nbsp;·&nbsp; ☠️ Warzone</li>
+        <li>🔨 Rust &nbsp;·&nbsp; 🎒 Escape from Tarkov &nbsp;·&nbsp; 💣 Battlefield &amp; more</li>
       </ul>
-
       <h3>Frequently Asked Questions</h3>
       <div class="faq-list">
-        <div class="faq-item"><button class="faq-q" type="button">What sensitivity do most pros use? <span class="faq-icon">+</span></button><div class="faq-a">Most pro FPS players use a low sensitivity with high DPI. In Valorant, pros average around 0.2–0.4 sens at 800 DPI (~200–350 eDPI). In CS2, typical pro sens is 1.0–2.0 at 400 DPI.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">How do I find my current sensitivity? <span class="faq-icon">+</span></button><div class="faq-a">Open your game settings and look under Mouse or Controls. The sensitivity slider value is what you enter here.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">Why doesn't the converted sensitivity feel exactly the same? <span class="faq-icon">+</span></button><div class="faq-a">Some games have additional multipliers for ADS, scope zoom, or FOV differences. This converter matches base hip-fire sensitivity as closely as possible.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">What is a good cm/360° for FPS? <span class="faq-icon">+</span></button><div class="faq-a">Most players find 20–50 cm/360° comfortable. Lower = faster, higher = more precise. Pros in tactical shooters like Valorant/CS2 often prefer 30–50 cm/360°.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">What sensitivity do most pros use? <span class="faq-icon">+</span></button><div class="faq-a">Most pro FPS players use low sensitivity. Valorant pros average 0.2–0.4 at 800 DPI (~200–350 eDPI). CS2 pros typically use 1.0–2.0 at 400 DPI.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">Why doesn't the converted feel exactly the same? <span class="faq-icon">+</span></button><div class="faq-a">Some games add multipliers for ADS, scope, or FOV. This converter matches base hip-fire sensitivity as closely as mathematically possible.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">What is a good cm/360°? <span class="faq-icon">+</span></button><div class="faq-a">Most players find 20–50 cm/360° comfortable. Tactical shooters favour 30–50 cm/360° for precision. Battle royales trend lower for faster flick shots.</div></div>
       </div>
     </article>
 
-    <div class="ad-banner ad-bottom"></div>
-
     <footer class="site-footer">
       <div class="footer-links">
-        <a href="index.html">Crypto Calculator</a>
-        <a href="gpa.html">GPA Calculator</a>
-        <a href="sensitivity.html">Sensitivity Calculator</a>
-        <a href="pdf.html">PDF Editor</a>
-        <a href="downloader.html">Video Downloader</a>
+        <a href="index.html">Crypto Calc</a><a href="gpa.html">GPA Calc</a>
+        <a href="sensitivity.html">Sensitivity</a><a href="converter.html">Converter</a><a href="pdf.html">PDF Editor</a>
       </div>
       <p>Made with ☀️ by ToolSuite &nbsp;·&nbsp; Not affiliated with any game publisher.</p>
     </footer>
   </div>
+<script>
+'use strict';
+const GAMES=[
+  {n:'Valorant',yaw:0.07,i:'🎯'},{n:'CS2 / Counter-Strike',yaw:0.022,i:'💥'},
+  {n:'Fortnite',yaw:0.05588,i:'🏗️'},{n:'Apex Legends',yaw:0.022,i:'🦊'},
+  {n:'Overwatch 2',yaw:0.0066,i:'🌍'},{n:'Rainbow Six Siege',yaw:0.00572,i:'🛡️'},
+  {n:'Warzone / MW',yaw:0.00666,i:'☠️'},{n:'Rust',yaw:0.1,i:'🔨'},
+  {n:'Escape from Tarkov',yaw:0.05756,i:'🎒'},{n:'Battlefield 2042',yaw:0.00572,i:'💣'},
+  {n:'Halo Infinite',yaw:0.01745,i:'👾'},{n:'Destiny 2',yaw:0.02222,i:'🚀'},
+  {n:'PUBG',yaw:0.00572,i:'🐔'},{n:'Quake',yaw:0.022,i:'⚡'},
+];
+const RL=(()=>{const ts=[],M=10,W=10000;return{ok(){const n=Date.now();while(ts.length&&n-ts[0]>W)ts.shift();if(ts.length>=M)return false;ts.push(n);return true;}}})();
+function st(id,v){const e=document.getElementById(id);if(e)e.textContent=String(v);}
+function ge(id){return document.getElementById(id);}
+function sanNum(v,mn,mx){const n=parseFloat(String(v).replace(/[^0-9.]/g,''));return isFinite(n)&&n>=mn&&n<=mx?n:NaN;}
 
-  <script src="sensitivity.js"></script>
-  <script>
-    document.querySelectorAll('.faq-q').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const ans = btn.nextElementSibling;
-        const isOpen = ans.classList.contains('open');
-        document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('open'));
-        document.querySelectorAll('.faq-q').forEach(b=>b.classList.remove('open'));
-        if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); }
-      });
-    });
-  </script>
+function populateSel(){
+  const f=ge('fromGame'),t=ge('toGame');
+  GAMES.forEach((g,i)=>{
+    const o1=document.createElement('option');o1.value=i;o1.textContent=g.i+' '+g.n;f.appendChild(o1);
+    const o2=document.createElement('option');o2.value=i;o2.textContent=g.i+' '+g.n;t.appendChild(o2);
+  });
+  t.value='1';
+}
+
+function convertSens(){
+  if(!RL.ok())return err('Slow down! Try again in a moment. 😊');
+  const fi=parseInt(ge('fromGame').value),ti=parseInt(ge('toGame').value);
+  const sens=sanNum(ge('fromSens').value,0.001,9999);
+  const dpi=sanNum(ge('dpi').value,100,25600);
+  if(isNaN(sens))return err('Please enter a valid sensitivity value. 🎯');
+  if(isNaN(dpi))return err('Please enter a valid DPI (100–25600). ⚙️');
+  if(fi<0||fi>=GAMES.length||ti<0||ti>=GAMES.length)return err('Please select valid games. 🎮');
+  const fg=GAMES[fi],tg=GAMES[ti];
+  const counts360=360/(sens*fg.yaw);
+  const toSens=360/(counts360*tg.yaw);
+  const edpi=sens*dpi,toEdpi=toSens*dpi;
+  const cm360=(counts360/dpi)*2.54,in360=counts360/dpi;
+  st('v-sens',toSens.toFixed(4));st('v-edpi',Math.round(toEdpi));
+  st('v-cm',cm360.toFixed(1)+' cm');st('v-in',in360.toFixed(2)+'"');
+  st('vemoji','🎯');st('vtitle',fg.n+' → '+tg.n);
+  st('vsub','eDPI: '+Math.round(edpi)+' · '+cm360.toFixed(1)+' cm per 360°');
+  const b=ge('vbanner');if(b)b.className='verdict-banner info';
+  const grid=ge('games-grid');grid.innerHTML='';
+  GAMES.forEach((g,i)=>{
+    if(i===fi)return;
+    const c=360/(counts360*g.yaw);
+    const card=document.createElement('div');card.className='gcard'+(i===ti?' hl':'');
+    const nm=document.createElement('div');nm.className='gname';nm.textContent=g.i+' '+g.n;
+    const sv=document.createElement('div');sv.className='gsens';sv.textContent=c.toFixed(4);
+    card.appendChild(nm);card.appendChild(sv);grid.appendChild(card);
+  });
+  show();
+}
+
+function err(msg){
+  st('vemoji','⚠️');st('vtitle','Oops!');st('vsub',msg);
+  const b=ge('vbanner');if(b)b.className='verdict-banner loss';
+  ['v-sens','v-edpi','v-cm','v-in'].forEach(i=>st(i,'—'));
+  ge('games-grid').innerHTML='';show();shake();
+}
+function show(){
+  const p=ge('results');if(p){p.style.display='block';p.style.animation='none';void p.offsetWidth;p.style.animation='pop-in .45s cubic-bezier(.22,1,.36,1)';}
+  const r=ge('resetBtn');if(r)r.style.display='block';
+  const p2=ge('results');if(p2)p2.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function shake(){const c=document.querySelector('.calc-card');if(c){c.style.animation='none';void c.offsetWidth;c.style.animation='shake .4s ease';}}
+function resetSens(){
+  ge('fromSens').value='';ge('dpi').value='';ge('fromGame').value='0';ge('toGame').value='1';
+  const p=ge('results');if(p)p.style.display='none';
+  const r=ge('resetBtn');if(r)r.style.display='none';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  populateSel();
+  document.querySelectorAll('.faq-q').forEach(b=>{b.addEventListener('click',()=>{
+    const a=b.nextElementSibling,o=a.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(x=>x.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(x=>x.classList.remove('open'));
+    if(!o){a.classList.add('open');b.classList.add('open');}
+  });});
+});
+</script>
 </body>
 </html>
