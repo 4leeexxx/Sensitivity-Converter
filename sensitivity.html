@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FPS Sensitivity Converter — Valorant, CS2, Fortnite, Apex & More | ToolSuite</title>
+  <meta name="description" content="Free FPS mouse sensitivity converter. Convert your sensitivity between Valorant, CS2, Fortnite, Apex Legends, Overwatch 2, Rainbow Six Siege, and more. Find your perfect eDPI instantly." />
+  <meta name="keywords" content="sensitivity converter, valorant sensitivity, CS2 sensitivity, fortnite sensitivity, apex legends sensitivity, overwatch sensitivity, rainbow six sensitivity, eDPI calculator, mouse sensitivity converter, FPS sens converter" />
+  <meta name="robots" content="index, follow" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none'; form-action 'none';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <link rel="stylesheet" href="shared.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,500;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
+
+  <nav class="site-nav">
+    <a class="nav-link" href="index.html">₿ Crypto Calc</a>
+    <a class="nav-link" href="gpa.html">🎓 GPA Calc</a>
+    <a class="nav-link active" href="sensitivity.html">🎮 Sensitivity Calc</a>
+    <a class="nav-link" href="pdf.html">📄 PDF Editor</a>
+    <a class="nav-link" href="downloader.html">⬇️ Video Downloader</a>
+  </nav>
+
+  <div class="ad-banner ad-top"></div>
+
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="logo-row">
+        <div class="logo-icon" aria-hidden="true">🎮</div>
+        <div class="logo-text">
+          <h1 class="logo">Sensitivity Converter</h1>
+          <p class="tagline">Convert your FPS mouse sensitivity across any game</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-layout">
+      <aside class="ad-sidebar"></aside>
+
+      <section class="calc-card" style="max-width:620px">
+        <p class="section-label">🖱️ Convert your sensitivity</p>
+
+        <div class="input-grid">
+          <div class="input-group">
+            <label for="fromGame">From Game</label>
+            <div class="input-wrap"><span class="prefix">🎯</span>
+              <select id="fromGame"></select>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="toGame">To Game</label>
+            <div class="input-wrap"><span class="prefix">🎯</span>
+              <select id="toGame"></select>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="fromSens">Your Sensitivity</label>
+            <div class="input-wrap"><span class="prefix">🖱</span><input type="number" id="fromSens" placeholder="e.g. 0.32" min="0" max="9999" step="any" autocomplete="off" /></div>
+            <span class="input-hint">In-game sensitivity value</span>
+          </div>
+          <div class="input-group">
+            <label for="mouseDPI">Mouse DPI</label>
+            <div class="input-wrap"><span class="prefix">⚙</span><input type="number" id="mouseDPI" placeholder="e.g. 800" min="100" max="25600" step="50" autocomplete="off" /></div>
+            <span class="input-hint">Your mouse DPI setting</span>
+          </div>
+        </div>
+
+        <button class="calc-btn" type="button" onclick="convertSens()">Convert Sensitivity 🎯</button>
+
+        <div class="results-panel" id="results">
+          <div class="verdict-banner" id="verdict-banner">
+            <span class="verdict-emoji" id="verdict-emoji">🎯</span>
+            <div class="verdict-copy">
+              <div class="verdict-title" id="verdict-title">Here's your converted sensitivity</div>
+              <div class="verdict-sub" id="verdict-sub">Use these values in your game settings</div>
+            </div>
+          </div>
+          <div class="results-grid">
+            <div class="result-card result-accent"><div class="res-icon">🎮</div><div class="res-label">Converted Sensitivity</div><div class="res-value res-large" id="val-sens">—</div></div>
+            <div class="result-card result-accent2"><div class="res-icon">📐</div><div class="res-label">eDPI</div><div class="res-value res-large" id="val-edpi">—</div></div>
+            <div class="result-card result-blue"><div class="res-icon">📏</div><div class="res-label">cm / 360°</div><div class="res-value" id="val-cm360">—</div></div>
+            <div class="result-card"><div class="res-icon">🔢</div><div class="res-label">in / 360°</div><div class="res-value" id="val-in360">—</div></div>
+          </div>
+
+          <div id="all-games-section">
+            <p class="section-label" style="margin-top:20px">📋 Your sensitivity in all games</p>
+            <div id="all-games-grid" class="all-games-grid"></div>
+          </div>
+        </div>
+
+        <button class="reset-btn" id="resetBtn" type="button" onclick="resetSens()">↺ Reset</button>
+      </section>
+
+      <aside class="ad-sidebar"></aside>
+    </main>
+
+    <div class="ad-banner ad-mid"></div>
+
+    <section class="info-section">
+      <h2 class="info-title">How it works</h2>
+      <div class="steps">
+        <div class="step"><div class="step-bubble">1</div><div class="step-body"><strong>Select source game</strong><p>Pick the game you currently play and know your sensitivity for.</p></div></div>
+        <div class="step"><div class="step-bubble">2</div><div class="step-body"><strong>Select target game</strong><p>Choose the game you want to convert your sensitivity to.</p></div></div>
+        <div class="step"><div class="step-bubble">3</div><div class="step-body"><strong>Enter your values</strong><p>Type your current in-game sensitivity and your mouse DPI.</p></div></div>
+        <div class="step"><div class="step-bubble">✨</div><div class="step-body"><strong>Get your new sens</strong><p>See the converted sensitivity, eDPI, and cm/360° for muscle memory.</p></div></div>
+      </div>
+    </section>
+
+    <article class="seo-section">
+      <h2>FPS Sensitivity Converter — Valorant, CS2, Fortnite & More</h2>
+      <p>Switching games but want to keep the same mouse feel? Our <strong>free sensitivity converter</strong> translates your sensitivity across all major FPS titles — <strong>Valorant, CS2 (Counter-Strike 2), Fortnite, Apex Legends, Overwatch 2, Rainbow Six Siege, Warzone, Rust, Escape from Tarkov</strong>, and more.</p>
+
+      <h3>What Is eDPI?</h3>
+      <p><strong>eDPI (effective DPI)</strong> = your mouse DPI × your in-game sensitivity. It's the true measure of how fast your crosshair moves. A Valorant player at 800 DPI × 0.32 sens has an eDPI of 256. Most pro players sit between 200–400 eDPI. Knowing your eDPI lets you match your feel perfectly across any game.</p>
+
+      <h3>What Is cm/360°?</h3>
+      <p><strong>cm/360°</strong> is how many centimetres you need to move your mouse to complete a full 360° rotation in-game. This is the most universal way to compare sensitivities across games. Most FPS pros use between 20–50 cm/360°.</p>
+
+      <h3>Supported Games</h3>
+      <ul>
+        <li>🎯 <strong>Valorant</strong> — Riot's tactical shooter</li>
+        <li>💥 <strong>CS2 / Counter-Strike 2</strong> — The classic</li>
+        <li>🏗️ <strong>Fortnite</strong> — Battle royale</li>
+        <li>🦊 <strong>Apex Legends</strong> — Hero battle royale</li>
+        <li>🌍 <strong>Overwatch 2</strong> — Team hero shooter</li>
+        <li>🛡️ <strong>Rainbow Six Siege</strong> — Tactical FPS</li>
+        <li>☠️ <strong>Warzone / Modern Warfare</strong> — COD Battle Royale</li>
+        <li>🔫 <strong>Rust</strong>, <strong>Escape from Tarkov</strong>, <strong>Battlefield</strong>, and more</li>
+      </ul>
+
+      <h3>Frequently Asked Questions</h3>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-q" type="button">What sensitivity do most pros use? <span class="faq-icon">+</span></button><div class="faq-a">Most pro FPS players use a low sensitivity with high DPI. In Valorant, pros average around 0.2–0.4 sens at 800 DPI (~200–350 eDPI). In CS2, typical pro sens is 1.0–2.0 at 400 DPI.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">How do I find my current sensitivity? <span class="faq-icon">+</span></button><div class="faq-a">Open your game settings and look under Mouse or Controls. The sensitivity slider value is what you enter here.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">Why doesn't the converted sensitivity feel exactly the same? <span class="faq-icon">+</span></button><div class="faq-a">Some games have additional multipliers for ADS, scope zoom, or FOV differences. This converter matches base hip-fire sensitivity as closely as possible.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">What is a good cm/360° for FPS? <span class="faq-icon">+</span></button><div class="faq-a">Most players find 20–50 cm/360° comfortable. Lower = faster, higher = more precise. Pros in tactical shooters like Valorant/CS2 often prefer 30–50 cm/360°.</div></div>
+      </div>
+    </article>
+
+    <div class="ad-banner ad-bottom"></div>
+
+    <footer class="site-footer">
+      <div class="footer-links">
+        <a href="index.html">Crypto Calculator</a>
+        <a href="gpa.html">GPA Calculator</a>
+        <a href="sensitivity.html">Sensitivity Calculator</a>
+        <a href="pdf.html">PDF Editor</a>
+        <a href="downloader.html">Video Downloader</a>
+      </div>
+      <p>Made with ☀️ by ToolSuite &nbsp;·&nbsp; Not affiliated with any game publisher.</p>
+    </footer>
+  </div>
+
+  <script src="sensitivity.js"></script>
+  <script>
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const ans = btn.nextElementSibling;
+        const isOpen = ans.classList.contains('open');
+        document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('open'));
+        document.querySelectorAll('.faq-q').forEach(b=>b.classList.remove('open'));
+        if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); }
+      });
+    });
+  </script>
+</body>
+</html>
